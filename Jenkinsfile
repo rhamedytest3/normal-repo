@@ -1,15 +1,12 @@
 pipeline {
     agent any
-    
-    // Tools are installed in the machine and configured in Global Configuration Tools
-    tools {
-        jdk 'openjdk'
-        gradle 'gradle'
-    }
     stages {
-        stage('Build') {
+        stage('maven:3.6.3-jdk-8') {
+            agent {
+                docker { image 'maven:3.6.3-jdk-8' }
+            }
             steps {
-                sh './gradlew build'
+                sh 'mvn --version'
             }
         }
     }
